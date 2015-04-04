@@ -17,7 +17,7 @@ int MN_init(Adafruit_HMC5883_Unified mag){
 }
 
 //function to return direction of required magnetic field
-int MN_bdot(Adafruit_HMC5883_Unified mag){
+int MN_bdot(Adafruit_HMC5883_Unified mag, char text[32]){
   int ret;
   sensors_event_t event1, event2;
   
@@ -32,5 +32,9 @@ int MN_bdot(Adafruit_HMC5883_Unified mag){
   } else {
     ret = MN_MINUS;
   }
+  text[0] = event1.magnetic.y;
+  text[1] = event2.magnetic.y;
+  text[3] = ret;
+  text[4] = '\0';
   return ret;
 }

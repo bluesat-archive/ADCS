@@ -22,4 +22,4 @@ int MN_init(Adafruit_HMC5883_Unified mag);
 
 //function to return direction of the magnetic field to be activated by setMT
 //return PLUS or MINUS
-int MN_bdot(Adafruit_HMC5883_Unified mag);
+int MN_bdot(Adafruit_HMC5883_Unified mag, char text[32]);

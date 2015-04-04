@@ -34,3 +34,12 @@ int MN_bdot(Adafruit_HMC5883_Unified mag){
   }
   return ret;
 }
+
+void MN_getEvent(Adafruit_HMC5883_Unified mag, int eventOut[3]){
+  sensors_event_t eventIn;
+  while (digitalRead(MN_READY) != 1){}//ensures MN is ready to measure (i.e. for v. small MN_DELAY)
+  mag.getEvent(&eventIn);
+  eventOut[0] = event1.magnetic.x
+  eventOut[1] = event1.magnetic.y
+  eventOut[2] = event1.magnetic.z
+}

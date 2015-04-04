@@ -23,3 +23,6 @@ int MN_init(Adafruit_HMC5883_Unified mag);
 //function to return direction of the magnetic field to be activated by setMT
 //return PLUS or MINUS
 int MN_bdot(Adafruit_HMC5883_Unified mag);
+
+void MN_getEvent(Adafruit_HMC5883_Unified mag, int eventOut[3]);
+
