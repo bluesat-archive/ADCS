@@ -1,5 +1,5 @@
 //Mark Yeo; mark.yeo@student.unsw.edu.au
-//Last Modified 13Apr15
+//Last Modified 16Mar15
 //ADC for controlling a single-axis magnetorquer using an L298N H-Bridge
 
 /*
@@ -15,12 +15,12 @@
  */
 
 //Pins
-#define MT_ENABLE 5
-#define MT_IN1 6
-#define MT_IN2 7
-#define MT_ENABLE_LED 2
-#define MT_IN1_LED 8
-#define MT_IN2_LED 9
+#define MT_ENABLE 7
+#define MT_IN1 8
+#define MT_IN2 9
+#define MT_ENABLE_LED 11
+#define MT_IN1_LED 12
+#define MT_IN2_LED 13
 
 #define MT_FWD 1
 #define MT_REV (-1)
