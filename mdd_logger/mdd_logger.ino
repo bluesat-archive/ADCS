@@ -16,14 +16,16 @@
 #include "magnometer.h"
 #include <SPI.h>
 #include <SD.h>
+#define X_DIR 0
 #define Y_DIR 1
-#define MN_DELAY 100 //time between turning off MT & polling MN (ms)
+#define Z_DIR 2
+#define MN_DELAY  100 //time between turning off MT & polling MN (ms)
 #define MT_ONTIME 100 //length of MT pulse (ms)
 
-const int chipSelect = 4; //SD logger variable
+Adafruit_HMC5883_Unified mag = Adafruit_HMC5883_Unified(12345); //12345 is some random unique ID
 int MT_event[2][3] = {{0,0,0},{0,0,0}};
 int counter = -1;
-Adafruit_HMC5883_Unified mag = Adafruit_HMC5883_Unified(12345); //12345 is some random unique ID
+const int chipSelect = 4; //SD logger variable
 void writeToSD (int MT_event[3], int counter);
 
 
@@ -31,18 +33,22 @@ void writeToSD (int MT_event[3], int counter);
 
 
 void setup() {
-  MT_init();    //Magnetorquer Init
-  MN_init(mag); //Magnometer Init
+  MT_init();    //Initialise magnetorquer
+  MN_init(mag); //Initialise magnometer
   
-  //SD Logger Init
+  //Initialise SD logger
+  pinMode(10, OUTPUT); //if mega 53, else 10
+  //SD.begin(chipSelect) //If serial debugging (below) disabled, uncomment this line
+  
+  //Begin code for serial debugging
   Serial.begin(9600);
   Serial.print("Initializing SD card...");
-  pinMode(10, OUTPUT); //53 for mega, else 10
   if (!SD.begin(chipSelect)) {
     Serial.println("Card failed, or not present");
     return;
   }
   Serial.println("card initialized.");
+  //End code for serial debugging
   
   //-1th MN poll
   MN_getEvent(mag, MT_event[1]);
@@ -75,7 +81,7 @@ void loop() {
 
 
 
-//Writes data to SD card
+//Write data to SD card
 void writeToSD (int MT_event[3], int counter){
   String dataString = "";
   dataString += String(counter);
@@ -92,10 +98,13 @@ void writeToSD (int MT_event[3], int counter){
   if (dataFile) {
     dataFile.println(dataString);
     dataFile.close();
-    //Also prints to serial (optional for logging)
+
+    //Begin code for serial debugging
     Serial.println(dataString);
   } else {
     Serial.println("error opening file");
+    //End code for serial debugging
+
   }
 }
 

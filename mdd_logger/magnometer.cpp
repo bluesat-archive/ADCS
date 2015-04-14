@@ -1,6 +1,7 @@
 //Jabez Wilson : jabez.wilson@student.unsw.edu.au
-//last edited  :  16 Mar 15
-//program to detect the sign of change in flux with Adafruit HMC5883L breakout triple axis megnetometer
+//Mark Yeo: mark.yeo@student.unsw.edu.au
+//Last Modified  :  13Apr15
+//Magnometer (Adafruit HMC5883L) functions for the Magnetic Detumbler Demo
 
 #include <Arduino.h>
 #include"magnometer.h"
@@ -16,24 +17,6 @@ int MN_init(Adafruit_HMC5883_Unified mag){
   pinMode(MN_READY, INPUT);
 }
 
-//function to return direction of required magnetic field
-int MN_bdot(Adafruit_HMC5883_Unified mag){
-  int ret;
-  sensors_event_t event1, event2;
-  
-  mag.getEvent(&event1);
-  delay(MN_DELAY);
-  while (digitalRead(MN_READY) != 1){}//ensures MN is ready to measure (i.e. for v. small MN_DELAY)
-  mag.getEvent(&event2);
-  
-  //only the sign of the difference is required
-  if((event2.magnetic.y - event1.magnetic.y)<0){
-    ret = MN_PLUS;
-  } else {
-    ret = MN_MINUS;
-  }
-  return ret;
-}
 
 void MN_getEvent(Adafruit_HMC5883_Unified mag, int eventOut[3]){
   sensors_event_t eventIn;
