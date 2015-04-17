@@ -1,18 +1,7 @@
 //Mark Yeo; mark.yeo@student.unsw.edu.au
-//Last Modified 13Apr15
+//Last Modified 18Apr15
 //ADC for controlling a single-axis magnetorquer using an L298N H-Bridge
 
-/*
- Arduino Pinout
- 5V   - L298N Vss
- GND  - L298N GND
- Pin2 - L298N ENABLE
- Pin3 - L298N IN1
- Pin4 - L298N IN2
- Pin10 - LED1 + resistor to gnd (indicator for Pin2)
- Pin11 - LED2 + resistor to gnd (indicator for Pin3)
- Pin12 - LED3 + resistor to gnd (indicator for Pin4)
- */
 
 //Pins
 #define MT_ENABLE 5
