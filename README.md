@@ -1,2 +1,2 @@
-# MagneticDetumblerDemo
-Code for the Magnetic Detumbler Demo
+# ADCS
+Code for the BLUEsat ADCS Project
